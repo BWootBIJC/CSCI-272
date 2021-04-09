@@ -15,17 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        Button signUpLink = findViewById(R.id.signUpLink);
-        signUpLink.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                sendToCreateAccount();
-            }
-        });
+        setContentView(R.layout.activity_main);
+
     }
-    public void sendToCreateAccount(){
-        Intent intent = new Intent(this, Register.class);
-        startActivity(intent);
-    }
-    }
+}

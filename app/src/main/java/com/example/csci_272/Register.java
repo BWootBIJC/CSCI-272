@@ -21,9 +21,12 @@ import java.io.ObjectOutputStream;
 public class Register extends AppCompatActivity {
 
     EditText editTextname, editTextemail, editTextusername, editTextpassword;
-    Button buttonRegister;
+    Button buttonRegister, buttonsignUpLink;
     TextView textViewRegister;
     ProgressBar progressBar;
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,22 +37,27 @@ public class Register extends AppCompatActivity {
         editTextusername = findViewById(R.id.username);
         editTextpassword = findViewById(R.id.password);
         buttonRegister = findViewById(R.id.register);
+        buttonsignUpLink = findViewById(R.id.signUpLink);
         textViewRegister = findViewById(R.id.register);
         progressBar = findViewById(R.id.progress);
+
+        buttonsignUpLink.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         buttonRegister.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                String name, email, username, password;
+                final String name, email, username, password;
                 name = editTextname.getText().toString();
                 email = (editTextemail.getText().toString());
                 username = (editTextusername.getText().toString());
                 password = (editTextpassword.getText().toString());
-                System.out.println(name);
-                System.out.println(email);
-                System.out.println(username);
-                System.out.println(password);
                 if (!name.equals("") && !email.equals("") && !username.equals("") && !password.equals(""))
                 {
                     progressBar.setVisibility(View.VISIBLE);
@@ -66,11 +74,11 @@ public class Register extends AppCompatActivity {
                             field[3] = "Password";
 
                             String[] data = new String[4];
-                            data[0] = "Name";
-                            data[1] = "Email";
-                            data[2] = "Username";
-                            data[3] = "Password";
-                            PutData putData = new PutData("http://192.168.1.90/Login-Database/signup.php", "POST", field, data);
+                            data[0] = name;
+                            data[1] = email;
+                            data[2] = username;
+                            data[3] = password;
+                            PutData putData = new PutData("http://10.109.30.16/Login-Database/signup.php", "POST", field, data);
                             if (putData.startPut())
                             {
                                 if (putData.onComplete()) {
@@ -78,6 +86,7 @@ public class Register extends AppCompatActivity {
                                     progressBar.setVisibility(View.GONE);
                                     if(result.equals("Sign Up Success"))
                                     {
+                                        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getApplicationContext(), Login.class);
                                         startActivity(intent);
                                         finish();
