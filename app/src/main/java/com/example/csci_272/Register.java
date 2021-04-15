@@ -68,17 +68,17 @@ public class Register extends AppCompatActivity {
                         public void run()
                         {
                             String[] field = new String[4];
-                            field[0] = "Name";
-                            field[1] = "Email";
-                            field[2] = "Username";
-                            field[3] = "Password";
+                            field[0] = "fullname";
+                            field[1] = "email";
+                            field[2] = "username";
+                            field[3] = "password";
 
                             String[] data = new String[4];
                             data[0] = name;
                             data[1] = email;
                             data[2] = username;
                             data[3] = password;
-                            PutData putData = new PutData("http://10.109.30.16/Login-Database/signup.php", "POST", field, data);
+                            PutData putData = new PutData("http://10.109.30.16/LoginRegister/signup.php", "POST", field, data);
                             if (putData.startPut())
                             {
                                 if (putData.onComplete()) {
