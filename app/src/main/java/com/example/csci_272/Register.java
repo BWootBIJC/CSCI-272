@@ -32,6 +32,7 @@ public class Register extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        //Connecting UI elements to Java file
         editTextname = findViewById(R.id.name);
         editTextemail = findViewById(R.id.email);
         editTextusername = findViewById(R.id.username);
@@ -58,6 +59,7 @@ public class Register extends AppCompatActivity {
                 email = (editTextemail.getText().toString());
                 username = (editTextusername.getText().toString());
                 password = (editTextpassword.getText().toString());
+                //checking to make sure the fields aren't empty before proceeding to collect user input
                 if (!name.equals("") && !email.equals("") && !username.equals("") && !password.equals(""))
                 {
                     progressBar.setVisibility(View.VISIBLE);
@@ -67,12 +69,13 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void run()
                         {
+                            //Collecting user input
                             String[] field = new String[4];
                             field[0] = "fullname";
                             field[1] = "email";
                             field[2] = "username";
                             field[3] = "password";
-
+                            //Posting user input to database
                             String[] data = new String[4];
                             data[0] = name;
                             data[1] = email;
@@ -81,6 +84,7 @@ public class Register extends AppCompatActivity {
                             PutData putData = new PutData("http://10.109.30.16/LoginRegister/signup.php", "POST", field, data);
                             if (putData.startPut())
                             {
+                                //Sending back corresponding signup success or signup failed message
                                 if (putData.onComplete()) {
                                     String result = putData.getResult();
                                     progressBar.setVisibility(View.GONE);

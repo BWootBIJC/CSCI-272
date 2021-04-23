@@ -10,7 +10,6 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Button signUpLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
